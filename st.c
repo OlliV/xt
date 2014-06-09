@@ -252,6 +252,8 @@ typedef struct {
 	Draw draw;
 	Visual *vis;
 	XSetWindowAttributes attrs;
+	Cursor cursor, bcursor; /* visible and blank cursors */
+	bool cursorstate; /* is cursor currently visible */
 	int scr;
 	bool isfixed; /* is fixed geometry? */
 	int l, t; /* left and top offset */
@@ -1119,6 +1121,13 @@ brelease(XEvent *e) {
 void
 bmotion(XEvent *e) {
 	int oldey, oldex, oldsby, oldsey;
+
+	if(!xw.cursorstate) {
+		XDefineCursor(xw.dpy, xw.win, xw.cursor);
+		xw.cursorstate = true;
+		if(!IS_SET(MODE_MOUSEMANY))
+			xsetpointermotion(0);
+	}
 
 	if(IS_SET(MODE_MOUSE) && !(e->xbutton.state & forceselmod)) {
 		mousereport(e);
@@ -3110,9 +3119,11 @@ xzoomreset(const Arg *arg) {
 void
 xinit(void) {
 	XGCValues gcvalues;
-	Cursor cursor;
 	Window parent;
 	pid_t thispid = getpid();
+	XColor xcwhite = {.red = 0xffff, .green = 0xffff, .blue = 0xffff};
+	XColor xcblack = {.red = 0x0000, .green = 0x0000, .blue = 0x0000};
+	Pixmap blankpm;
 
 	if(!(xw.dpy = XOpenDisplay(NULL)))
 		die("Can't open display\n");
@@ -3185,11 +3196,13 @@ xinit(void) {
 		die("XCreateIC failed. Could not obtain input method.\n");
 
 	/* white cursor, black outline */
-	cursor = XCreateFontCursor(xw.dpy, XC_xterm);
-	XDefineCursor(xw.dpy, xw.win, cursor);
-	XRecolorCursor(xw.dpy, cursor,
-		&(XColor){.red = 0xffff, .green = 0xffff, .blue = 0xffff},
-		&(XColor){.red = 0x0000, .green = 0x0000, .blue = 0x0000});
+	xw.cursor = XCreateFontCursor(xw.dpy, XC_xterm);
+	XDefineCursor(xw.dpy, xw.win, xw.cursor);
+	XRecolorCursor(xw.dpy, xw.cursor, &xcwhite, &xcblack);
+	xw.cursorstate = true;
+	blankpm = XCreateBitmapFromData(xw.dpy, xw.win, &(char){0}, 1, 1);
+	xw.bcursor = XCreatePixmapCursor(xw.dpy, blankpm, blankpm,
+								     &xcblack, &xcblack, 0, 0);
 
 	xw.xembed = XInternAtom(xw.dpy, "_XEMBED", False);
 	xw.wmdeletewin = XInternAtom(xw.dpy, "WM_DELETE_WINDOW", False);
@@ -3658,6 +3671,8 @@ unmap(XEvent *ev) {
 
 void
 xsetpointermotion(int set) {
+	if(!set && !xw.cursorstate)
+		return;
 	MODBIT(xw.attrs.event_mask, set, PointerMotionMask);
 	XChangeWindowAttributes(xw.dpy, xw.win, CWEventMask, &xw.attrs);
 }
@@ -3750,6 +3765,12 @@ kpress(XEvent *ev) {
 	long c;
 	Status status;
 	Shortcut *bp;
+
+	if(xw.cursorstate) {
+		XDefineCursor(xw.dpy, xw.win, xw.bcursor);
+		xsetpointermotion(1);
+		xw.cursorstate = false;
+	}
 
 	if(IS_SET(MODE_KBDLOCK))
 		return;
