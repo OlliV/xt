@@ -33,6 +33,8 @@
 
 #include "arg.h"
 
+int set_icon(char *filename, Display *display, Window *window);
+
 char *argv0;
 
 #define Glyph Glyph_
@@ -3192,6 +3194,8 @@ xinit(void) {
 	xresettitle();
 	XMapWindow(xw.dpy, xw.win);
 	xhints();
+    if (icon_file[0] != '\0')
+        set_icon(icon_file, xw.dpy, &xw.win);
 	XSync(xw.dpy, False);
 }
 
