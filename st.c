@@ -3266,7 +3266,7 @@ xdraws(char *s, Glyph base, int x, int y, int charlen, int bytelen) {
 		 * to bright system colors [8-15]
 		 */
 		if(BETWEEN(base.fg, 0, 7) && !(base.mode & ATTR_FAINT))
-			fg = &dc.col[base.fg + 8];
+			fg = &dc.col[base.fg];
 
 		if(base.mode & ATTR_ITALIC) {
 			font = &dc.ibfont;
