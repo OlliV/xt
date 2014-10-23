@@ -3,7 +3,7 @@
 
 include config.mk
 
-SRC = st.c
+SRC = st.c seticon.c
 OBJ = ${SRC:.c=.o}
 
 all: options st
