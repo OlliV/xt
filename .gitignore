@@ -1,2 +1,4 @@
 st
 *.o
+config.gen.h
+config
