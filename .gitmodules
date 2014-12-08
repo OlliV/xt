@@ -1,0 +1,3 @@
+[submodule "kconfig"]
+	path = kconfig
+	url = git@github.com:guillon/kconfig.git

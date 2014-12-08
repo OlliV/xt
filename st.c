@@ -33,7 +33,9 @@
 
 #include "arg.h"
 
+#if configICON != 0
 int set_icon(char *filename, Display *display, Window *window);
+#endif
 
 char *argv0;
 
@@ -3216,8 +3218,10 @@ xinit(void) {
 	xresettitle();
 	XMapWindow(xw.dpy, xw.win);
 	xhints();
+#if configICON != 0
     if (icon_file[0] != '\0')
         set_icon(icon_file, xw.dpy, &xw.win);
+#endif
 	XSync(xw.dpy, False);
 }
 

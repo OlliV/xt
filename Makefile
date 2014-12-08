@@ -3,7 +3,8 @@
 
 include config.mk
 
-SRC = st.c seticon.c
+SRC-${configICON} += seticon.c
+SRC = st.c ${SRC-1}
 OBJ = ${SRC:.c=.o}
 
 all: options st
@@ -13,9 +14,6 @@ options:
 	@echo "CFLAGS   = ${CFLAGS}"
 	@echo "LDFLAGS  = ${LDFLAGS}"
 	@echo "CC       = ${CC}"
-
-config.h:
-	cp config.def.h config.h
 
 .c.o:
 	@echo CC $<

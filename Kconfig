@@ -1,0 +1,176 @@
+mainmenu "xt - terminal config"
+
+config configGD
+    bool
+    default n
+
+config configGLIB
+    bool
+    default n
+
+menu "Appearance"
+
+config configFONT
+    string "Font"
+    default "DejaVu Sans Mono:pixelsize=12:antialias=true:autohint=true"
+    ---help---
+     see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+
+config configBORDERPX
+    int "Border pixels"
+    default 2
+
+config configWORDDELIMITERS
+    string "Word delimiter string"
+    default " "
+    ---help---
+    More advanced example: " `'\"()[]{}
+
+config configDOUBLECLICKTIMEOUT
+    int "Double click timeout [ms]"
+    default 300
+
+config configTRIPLECLICKTIMEOUT
+    int "Triple click timeout [ms]"
+    default 600
+
+config configALLOWALTSCREEN
+    bool "Aalt screens"
+    default y
+
+config configXFPS
+    int "X FPS"
+    default 120
+
+config configACTIONFPS
+    int "AFPS"
+    default 30
+
+config configBLINKTIMEOUT
+    int "Blinking timeout"
+    default 800
+    ---help---
+    Blinking timeout (set to 0 to disable blinking) for the terminal blinking
+    attribute.
+
+config configBELLVOLUME
+    int "Bell volume"
+    default 1
+    ---help---
+    Bell volume value must be a value between -100 and 100. Use 0 for disabling
+    it.
+
+config configTERMNAME
+    string "TERM value"
+    default "st-256color"
+
+config configTABSPACES
+    int "Tab spaces"
+    default 8
+
+menu "Terminal Colors"
+
+config configCBLACK
+    string "0: black"
+    default "#073642"
+
+config configCRED
+    string "1: red"
+    default "#dc322f"
+
+config configCGREEN
+    string "2: green"
+    default "#859900"
+
+config configCYELLOW
+    string "3: yellow"
+    default "#b58900"
+
+config configCBLUE
+    string "4: blue"
+    default "#268bd2"
+
+config configCMAGENTA
+    string "5: magenta"
+    default "#d33682"
+
+config configCCYAN
+    string "6: cyan"
+    default "#2aa198"
+
+config configCWHITE
+    string "7: white"
+    default "#eee8d5"
+
+config configCBRBLACK
+    string "8: brblack"
+    default "#002b36"
+
+config configCBRRED
+    string "9: brred"
+    default "#cb4b16"
+
+config configCBRGREEN
+    string "10: brgreen"
+    default "#586e75"
+
+config configCBRYELLOW
+    string "11: bryellow"
+    default "#657b83"
+
+config configCBRBLUE
+    string "12: brblue"
+    default "#839496"
+
+config configCBRMAGENTA
+    string "13: brmagenta"
+    default "#6c71c4"
+
+config configCBRCYAN
+    string "14: brcyan"
+    default "#93a1a1"
+
+config configCBRWHITE
+    string "15: brwhite"
+    default "#fdf6e3"
+
+comment "Default colors (colorname index)"
+
+config configCDEFAULTFG
+    int "Default foreground"
+    default 12
+
+config configCDEFAULTBG
+    int "Default background"
+    default 8
+
+config configCDEFAULTCS
+    int "Default cursor"
+    default 14
+
+comment "Colors used, when the specific fg == defaultfg."
+
+config configCDEFAULTITALIC
+    int "Default italic"
+    default 11
+
+config configCDEFAULTUNDERLINE
+    int "Default underline"
+    default 7
+
+endmenu
+
+endmenu
+
+config configSHELL
+    string "Shell"
+    default "/bin/sh"
+
+config configICON
+    bool "Icon support"
+    select configGD
+    select configGLIB
+
+config configICON_FILE
+    string "Icon filename"
+    depends on configICON

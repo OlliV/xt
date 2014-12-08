@@ -1,0 +1,4 @@
+#!/bin/bash
+
+kconfig/config.sh menuconfig
+./aconf.sh config config.gen.h

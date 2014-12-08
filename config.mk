@@ -10,12 +10,16 @@ MANPREFIX = ${PREFIX}/share/man
 X11INC = /usr/X11R6/include
 X11LIB = /usr/X11R6/lib
 
-# includes and libs
-INCS = -I. -I/usr/include -I${X11INC} \
-	   -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include \
+# includes
+INCS-${configGLIB} += -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include
+INCS = -I. -I/usr/include -I${X11INC} ${INCS-1} \
        `pkg-config --cflags fontconfig` \
        `pkg-config --cflags freetype2`
-LIBS = -L/usr/lib -lc -L${X11LIB} -lm -lrt -lX11 -lutil -lXext -lXft -lgd -lglib-2.0 \
+
+# libs
+LIBS-${configGD} += -lgd
+LIBS-${configGLIB} += -lglib-2.0
+LIBS = -L/usr/lib -lc -L${X11LIB} -lm -lrt -lX11 -lutil -lXext -lXft ${LIBS-1} \
        `pkg-config --libs fontconfig`  \
        `pkg-config --libs freetype2`
 
