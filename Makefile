@@ -19,7 +19,7 @@ options:
 	@echo CC $<
 	@${CC} -c ${CFLAGS} $<
 
-${OBJ}: config.h config.mk
+${OBJ}: config.h config.gen.h config.mk
 
 st: ${OBJ}
 	@echo CC -o $@

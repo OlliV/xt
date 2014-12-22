@@ -34,8 +34,15 @@ config configTRIPLECLICKTIMEOUT
     int "Triple click timeout [ms]"
     default 600
 
+config configHIDE_X_CURSOR
+    bool "Hide X cursor when typing"
+    default y
+    ---help---
+    Hide the X cursor when typing in the terminal. The cursor is displayed again
+    when the mouse is moved.
+
 config configALLOWALTSCREEN
-    bool "Aalt screens"
+    bool "Alt screens"
     default y
 
 config configXFPS
@@ -59,10 +66,6 @@ config configBELLVOLUME
     ---help---
     Bell volume value must be a value between -100 and 100. Use 0 for disabling
     it.
-
-config configTERMNAME
-    string "TERM value"
-    default "st-256color"
 
 config configTABSPACES
     int "Tab spaces"
@@ -161,6 +164,10 @@ config configCDEFAULTUNDERLINE
 endmenu
 
 endmenu
+
+config configTERMNAME
+    string "TERM value"
+    default "st-256color"
 
 config configSHELL
     string "Shell"

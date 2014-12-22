@@ -1124,12 +1124,14 @@ void
 bmotion(XEvent *e) {
 	int oldey, oldex, oldsby, oldsey;
 
+#if configHIDE_X_CURSOR
 	if(!xw.cursorstate) {
 		XDefineCursor(xw.dpy, xw.win, xw.cursor);
 		xw.cursorstate = true;
 		if(!IS_SET(MODE_MOUSEMANY))
 			xsetpointermotion(0);
 	}
+#endif
 
 	if(IS_SET(MODE_MOUSE) && !(e->xbutton.state & forceselmod)) {
 		mousereport(e);
@@ -3770,11 +3772,13 @@ kpress(XEvent *ev) {
 	Status status;
 	Shortcut *bp;
 
+#if configHIDE_X_CURSOR
 	if(xw.cursorstate) {
 		XDefineCursor(xw.dpy, xw.win, xw.bcursor);
 		xsetpointermotion(1);
 		xw.cursorstate = false;
 	}
+#endif
 
 	if(IS_SET(MODE_KBDLOCK))
 		return;
