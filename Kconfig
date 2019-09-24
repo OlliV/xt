@@ -103,7 +103,7 @@ config configCCYAN
 
 config configCWHITE
     string "7: white"
-    default "#d3d7cf"
+    default "#eee8d5"
 
 config configCBRBLACK
     string "8: brblack"
@@ -135,7 +135,7 @@ config configCBRCYAN
 
 config configCBRWHITE
     string "15: brwhite"
-    default "#eeeeec"
+    default "#fdf6e3"
 
 comment "Default colors (colorname index)"
 
