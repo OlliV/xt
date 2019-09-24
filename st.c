@@ -1176,9 +1176,13 @@ execsh(void) {
 			die("who are you?\n");
 	}
 
+#if 0
 	if (!(sh = getenv("SHELL"))) {
+#endif
 		sh = (pw->pw_shell[0]) ? pw->pw_shell : shell;
+#if 0
 	}
+#endif
 
 	if(opt_cmd)
 		prog = opt_cmd[0];
