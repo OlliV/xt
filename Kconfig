@@ -141,7 +141,7 @@ comment "Default colors (colorname index)"
 
 config configCDEFAULTFG
     int "Default foreground"
-    default 12
+    default 15
 
 config configCDEFAULTBG
     int "Default background"
@@ -149,7 +149,7 @@ config configCDEFAULTBG
 
 config configCDEFAULTCS
     int "Default cursor"
-    default 14
+    default 7
 
 comment "Colors used, when the specific fg == defaultfg."
 
