@@ -4072,7 +4072,7 @@ copyurl(const Arg *arg) {
 		sel.ob.x = strlen(linestr) - strlen(match);
 
 		/* trim the rest of the line from the url match */
-		for (c = match; c != '\0'; ++c)
+		for (c = match; *c != '\0'; ++c)
 			if (!strchr(URLCHARS, *c)) {
 				*c = '\0';
 				break;
