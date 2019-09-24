@@ -75,67 +75,67 @@ menu "Terminal Colors"
 
 config configCBLACK
     string "0: black"
-    default "#073642"
+    default "#2e3436"
 
 config configCRED
     string "1: red"
-    default "#dc322f"
+    default "#cc0000"
 
 config configCGREEN
     string "2: green"
-    default "#859900"
+    default "#4e9a06"
 
 config configCYELLOW
     string "3: yellow"
-    default "#b58900"
+    default "#c4a000"
 
 config configCBLUE
     string "4: blue"
-    default "#268bd2"
+    default "#3465a4"
 
 config configCMAGENTA
     string "5: magenta"
-    default "#d33682"
+    default "#75507b"
 
 config configCCYAN
     string "6: cyan"
-    default "#2aa198"
+    default "#06989a"
 
 config configCWHITE
     string "7: white"
-    default "#eee8d5"
+    default "#d3d7cf"
 
 config configCBRBLACK
     string "8: brblack"
-    default "#002b36"
+    default "#555753"
 
 config configCBRRED
     string "9: brred"
-    default "#cb4b16"
+    default "#ef2929"
 
 config configCBRGREEN
     string "10: brgreen"
-    default "#586e75"
+    default "#8ae234"
 
 config configCBRYELLOW
     string "11: bryellow"
-    default "#657b83"
+    default "#fce94f"
 
 config configCBRBLUE
     string "12: brblue"
-    default "#839496"
+    default "#729fcf"
 
 config configCBRMAGENTA
     string "13: brmagenta"
-    default "#6c71c4"
+    default "#ad7fa8"
 
 config configCBRCYAN
     string "14: brcyan"
-    default "#93a1a1"
+    default "#34e2e2"
 
 config configCBRWHITE
     string "15: brwhite"
-    default "#fdf6e3"
+    default "#eeeeec"
 
 comment "Default colors (colorname index)"
 
